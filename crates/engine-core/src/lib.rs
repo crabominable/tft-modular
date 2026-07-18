@@ -1,6 +1,7 @@
 // crates/engine-core/src/lib.rs
 #![deny(unsafe_code)]
 
+pub mod combat;
 pub mod command;
 pub mod economy;
 pub mod fixed;
@@ -10,6 +11,10 @@ pub mod pool;
 pub mod rng;
 pub mod shop;
 
+pub use combat::{
+    attack_interval_ticks, valid_spawn, CombatResult, CombatState, CombatUnit, Pos, Side,
+    BOARD_SIZE, MANA_PER_ATTACK, MAX_TICKS, TICK_MS,
+};
 pub use command::Command;
 pub use economy::{board_cap_for_level, interest, level_from_xp, XP_THRESHOLDS, MAX_LEVEL};
 pub use fixed::{fp_from_i64, fp_mul, Fp, FP_ONE};
