@@ -1,0 +1,146 @@
+{
+  "manifest": {
+    "id": "reference_embers",
+    "name": "Ember Frontier",
+    "version": "0.1.0",
+    "api_version": "1.0.0",
+    "description": "Original sample pack for TFT Modular offline MVP."
+  },
+  "units": [
+    {
+      "id": "ember_scout",
+      "name": "Ember Scout",
+      "cost": 1,
+      "traits": [
+        "emberkin"
+      ],
+      "ability_id": "spark_cut",
+      "stats": {
+        "hp": 500,
+        "atk": 45,
+        "armor": 10,
+        "mr": 10,
+        "range": 1,
+        "attack_speed_milli": 700
+      }
+    },
+    {
+      "id": "mist_healer",
+      "name": "Mist Healer",
+      "cost": 2,
+      "traits": [
+        "emberkin"
+      ],
+      "ability_id": "mist_balm",
+      "stats": {
+        "hp": 450,
+        "atk": 30,
+        "armor": 15,
+        "mr": 25,
+        "range": 3,
+        "attack_speed_milli": 650
+      }
+    },
+    {
+      "id": "stone_warden",
+      "name": "Stone Warden",
+      "cost": 2,
+      "traits": [
+        "bulwark"
+      ],
+      "ability_id": "guard_pulse",
+      "stats": {
+        "hp": 800,
+        "atk": 40,
+        "armor": 40,
+        "mr": 20,
+        "range": 1,
+        "attack_speed_milli": 550
+      }
+    }
+  ],
+  "traits": [
+    {
+      "id": "bulwark",
+      "name": "Bulwark",
+      "breakpoints": [
+        {
+          "min_units": 1,
+          "modifiers": [
+            {
+              "stat": "armor",
+              "amount": 20
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "emberkin",
+      "name": "Emberkin",
+      "breakpoints": [
+        {
+          "min_units": 2,
+          "modifiers": [
+            {
+              "stat": "atk",
+              "amount": 15
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "id": "guard_pulse",
+      "name": "Guard Pulse",
+      "mana_cost": 80,
+      "trigger": "ON_CAST",
+      "targeting": {
+        "type": "SELF"
+      },
+      "effects": [
+        {
+          "type": "SHIELD",
+          "amount": 200,
+          "duration_ms": 3000
+        }
+      ]
+    },
+    {
+      "id": "mist_balm",
+      "name": "Mist Balm",
+      "mana_cost": 70,
+      "trigger": "ON_CAST",
+      "targeting": {
+        "type": "SELF"
+      },
+      "effects": [
+        {
+          "type": "HEAL",
+          "amount": 180,
+          "scaling": "NONE"
+        }
+      ]
+    },
+    {
+      "id": "spark_cut",
+      "name": "Spark Cut",
+      "mana_cost": 60,
+      "trigger": "ON_CAST",
+      "targeting": {
+        "type": "NEAREST_ENEMY",
+        "count": 1
+      },
+      "effects": [
+        {
+          "type": "DAMAGE",
+          "amount": 120,
+          "scaling": "ATK"
+        }
+      ]
+    }
+  ],
+  "modHash": "bafe5e2f6856c4545ce7109107220400f7d6e713c3b83d3fd4e9d748f0bcf38f"
+}

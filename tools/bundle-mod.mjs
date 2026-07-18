@@ -1,0 +1,43 @@
+/**
+ * Bundle mods/reference-mod into packages/client-ui/public/reference-mod.json
+ * for the offline client-ui vertical slice.
+ *
+ * Usage (from repo root):
+ *   node --experimental-strip-types tools/bundle-mod.mjs
+ */
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { loadPackFromDirectory } from "../packages/plugin-loader/src/index.ts";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const root = path.resolve(__dirname, "..");
+const modDir = path.join(root, "mods", "reference-mod");
+const outPath = path.join(
+  root,
+  "packages",
+  "client-ui",
+  "public",
+  "reference-mod.json",
+);
+
+const result = await loadPackFromDirectory(modDir);
+if (!result.ok) {
+  console.error("bundle-mod failed:", result.error);
+  process.exit(1);
+}
+
+const { pack, modHash } = result;
+const payload = {
+  ...pack,
+  modHash,
+};
+
+fs.mkdirSync(path.dirname(outPath), { recursive: true });
+fs.writeFileSync(outPath, JSON.stringify(payload, null, 2) + "\n", "utf8");
+
+console.log(`Wrote ${path.relative(root, outPath)}`);
+console.log(`modHash=${modHash}`);
+console.log(
+  `units=${pack.units.length} traits=${pack.traits.length} abilities=${pack.abilities.length}`,
+);
