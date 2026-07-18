@@ -21,9 +21,9 @@ function unitVisual(
     .toUpperCase();
   return `
     <div class="unit-chip">
-      <div class="portrait" style="border-color:${c.border};box-shadow:0 0 10px ${c.glow};color:${c.label}">${initial}</div>
+      <div class="portrait" style="border-color:${c.border};box-shadow:0 0 14px ${c.glow};color:${c.label}">${initial}</div>
       <div class="name" style="color:${c.label}">${name}</div>
-      <div class="cost">${cost}g</div>
+      <div class="cost">${cost} ouro</div>
     </div>`;
 }
 

@@ -9,9 +9,7 @@ export type ShopHandlers = {
   onAutoPlace: () => void;
 };
 
-/** Rough XP needed display — engine has cumulative thresholds; show simple bar by level. */
 function xpProgress(level: number, xp: number): number {
-  // Visual only; mirrors approximate gaps from economy table
   const gaps: Record<number, number> = {
     1: 2,
     2: 4,
@@ -23,7 +21,7 @@ function xpProgress(level: number, xp: number): number {
     8: 20,
   };
   const gap = gaps[level] ?? 20;
-  return Math.min(100, Math.round((xp % Math.max(gap, 1)) / gap * 100));
+  return Math.min(100, Math.round(((xp % Math.max(gap, 1)) / gap) * 100));
 }
 
 export function renderShopDock(
@@ -60,12 +58,14 @@ export function renderShopDock(
         .toUpperCase();
       const canBuy = shopOpen && gold >= offer.cost;
       return `
-        <div class="shop-card" style="border-color:${c.border};box-shadow:0 0 16px ${c.glow}">
-          <span class="cost-tag" style="color:${c.label}">${offer.cost}</span>
-          <div class="art" style="color:${c.label};border-color:${c.border}">${initial}</div>
+        <div class="shop-card" style="border-color:${c.border};box-shadow:0 0 18px ${c.glow}">
+          <span class="cost-tag" style="color:${c.label};border-color:${c.border}">${offer.cost}</span>
+          <div class="art" style="color:${c.label};border-color:${c.border};box-shadow:inset 0 0 24px ${c.glow}">${initial}</div>
           <div class="title" style="color:${c.label}">${name}</div>
           <div class="traits-line">${traits || "—"}</div>
-          <button type="button" class="buy" data-buy="${i}" ${canBuy ? "" : "disabled"}>Comprar</button>
+          <button type="button" class="buy" data-buy="${i}" ${canBuy ? "" : "disabled"}>
+            Comprar · ${offer.cost} ouro
+          </button>
         </div>`;
     })
     .join("");
@@ -74,15 +74,22 @@ export function renderShopDock(
 
   root.innerHTML = `
     <div class="shop-controls">
+      <div class="shop-gold-block" title="Seu ouro">
+        <div class="coin" aria-hidden="true"></div>
+        <div class="g-meta">
+          <span class="g-lbl">Ouro</span>
+          <span class="g-val">${gold}</span>
+        </div>
+      </div>
       <div class="lvl-block">Nível <strong>${level}</strong> · XP ${xp}</div>
       <div class="xp-track"><i style="width:${pct}%"></i></div>
-      <button type="button" class="btn-tft" data-act="buyxp" ${shopOpen && gold >= 4 ? "" : "disabled"}>Comprar XP · 4◈</button>
-      <button type="button" class="btn-tft gold-btn" data-act="reroll" ${shopOpen && gold >= 2 ? "" : "disabled"}>Atualizar · 2◈</button>
+      <button type="button" class="btn-tft" data-act="buyxp" ${shopOpen && gold >= 4 ? "" : "disabled"}>XP · 4 ouro</button>
+      <button type="button" class="btn-tft gold-btn" data-act="reroll" ${shopOpen && gold >= 2 ? "" : "disabled"}>Reroll · 2 ouro</button>
     </div>
     <div class="shop-row">${cards}</div>
     <div class="shop-end">
       <button type="button" class="btn-tft" data-act="autoplace" ${shopOpen ? "" : "disabled"}>Auto-campo</button>
-      <button type="button" class="btn-tft ready" data-act="endshop" ${shopOpen ? "" : "disabled"}>Pronto ⚔</button>
+      <button type="button" class="btn-tft ready" data-act="endshop" ${shopOpen ? "" : "disabled"}>Pronto</button>
     </div>
   `;
 

@@ -19,10 +19,19 @@ export function renderTopBar(
   el.innerHTML = `
     <div class="brand">${bundle.manifest.name.toUpperCase()}</div>
     <div class="stage">RODADA <em>${snap.round}</em> · ${phaseLabel}</div>
-    <div class="stat-pills">
-      <span class="pill gold">◈ ${humanGold}</span>
-      <span class="pill lvl">Nv ${humanLevel}</span>
-      <span class="pill hp">♥ ${humanHp}</span>
+    <div class="eco-cluster" aria-label="Economia e vida">
+      <div class="eco-stat gold" title="Ouro">
+        <span class="lbl">Ouro</span>
+        <span class="val">${humanGold}</span>
+      </div>
+      <div class="eco-stat hp" title="Vida">
+        <span class="lbl">Vida</span>
+        <span class="val">${humanHp}</span>
+      </div>
+      <div class="eco-stat lvl" title="Nível">
+        <span class="lbl">Nível</span>
+        <span class="val">${humanLevel}</span>
+      </div>
     </div>
   `;
 }
@@ -31,7 +40,7 @@ export function renderTraits(el: HTMLElement, snap: MatchSnapshot, bundle: Plugi
   const human = snap.players[0];
   const traits = computeTraits(human, bundle);
   if (traits.length === 0) {
-    el.innerHTML = `<h3>Sinergias</h3><p style="color:var(--muted);font-size:0.8rem;padding:0 0.35rem">Coloque unidades no tabuleiro para ativar traits.</p>`;
+    el.innerHTML = `<h3>Sinergias</h3><p style="color:var(--muted);font-size:0.85rem;padding:0 0.35rem;font-weight:600">Coloque unidades no tabuleiro para ativar traits.</p>`;
     return;
   }
   el.innerHTML =
@@ -51,7 +60,7 @@ export function renderTraits(el: HTMLElement, snap: MatchSnapshot, bundle: Plugi
             <div class="trait-icon">${initials}</div>
             <div class="trait-meta">
               <div class="trait-name">${t.def.name}</div>
-              <div class="trait-count">${t.count}${next}${on ? " · ativo" : ""}</div>
+              <div class="trait-count">${t.count}${next}${on ? " · ATIVO" : ""}</div>
             </div>
           </div>`;
       })
@@ -68,7 +77,7 @@ export function renderFoes(el: HTMLElement, snap: MatchSnapshot): void {
         <div class="foe-card ${i === 0 ? "you" : ""}">
           <div class="name">${label}</div>
           <div class="hp-bar"><i style="width:${pct}%"></i></div>
-          <div class="hp-num">${p.hp} HP · Nv ${p.level}</div>
+          <div class="hp-num">${p.hp} HP · Nv ${p.level} · ${p.gold} ouro</div>
         </div>`;
     })
     .join("");
