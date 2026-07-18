@@ -1,0 +1,8 @@
+{
+  "id": "shadow_blade",
+  "name": "Shadow Blade",
+  "cost": 1,
+  "traits": ["leaf"],
+  "ability_id": "chakra_blade",
+  "stats": { "hp": 480, "atk": 55, "armor": 10, "mr": 10, "range": 1, "attack_speed_milli": 780 }
+}

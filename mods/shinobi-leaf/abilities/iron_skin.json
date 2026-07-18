@@ -1,0 +1,8 @@
+{
+  "id": "iron_skin",
+  "name": "Iron Skin",
+  "mana_cost": 65,
+  "trigger": "ON_CAST",
+  "targeting": { "type": "SELF" },
+  "effects": [{ "type": "SHIELD", "amount": 280, "duration_ms": 4000 }]
+}

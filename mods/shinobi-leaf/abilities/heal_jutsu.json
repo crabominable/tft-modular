@@ -1,0 +1,8 @@
+{
+  "id": "heal_jutsu",
+  "name": "Green Hands",
+  "mana_cost": 60,
+  "trigger": "ON_CAST",
+  "targeting": { "type": "SELF" },
+  "effects": [{ "type": "HEAL", "amount": 220, "scaling": "NONE" }]
+}

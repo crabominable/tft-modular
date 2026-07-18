@@ -1,0 +1,8 @@
+{
+  "id": "leaf",
+  "name": "Leaf Village",
+  "breakpoints": [
+    { "min_units": 2, "modifiers": [{ "stat": "atk", "amount": 12 }] },
+    { "min_units": 4, "modifiers": [{ "stat": "atk", "amount": 30 }, { "stat": "hp", "amount": 80 }] }
+  ]
+}

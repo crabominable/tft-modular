@@ -1,0 +1,8 @@
+{
+  "id": "iron_monk",
+  "name": "Iron Monk",
+  "cost": 3,
+  "traits": ["sand", "mystic"],
+  "ability_id": "iron_skin",
+  "stats": { "hp": 1000, "atk": 50, "armor": 55, "mr": 40, "range": 1, "attack_speed_milli": 500 }
+}

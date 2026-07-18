@@ -1,0 +1,8 @@
+{
+  "id": "thunder_prince",
+  "name": "Thunder Prince",
+  "cost": 3,
+  "traits": ["storm"],
+  "ability_id": "thunder_fall",
+  "stats": { "hp": 720, "atk": 70, "armor": 25, "mr": 20, "range": 1, "attack_speed_milli": 700 }
+}

@@ -1,0 +1,8 @@
+{
+  "id": "leaf_runner",
+  "name": "Leaf Runner",
+  "cost": 1,
+  "traits": ["leaf"],
+  "ability_id": "rasen_orb",
+  "stats": { "hp": 520, "atk": 48, "armor": 15, "mr": 15, "range": 1, "attack_speed_milli": 720 }
+}

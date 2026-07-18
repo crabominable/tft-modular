@@ -1,0 +1,11 @@
+{
+  "id": "sand_coffin",
+  "name": "Sand Coffin",
+  "mana_cost": 80,
+  "trigger": "ON_CAST",
+  "targeting": { "type": "NEAREST_ENEMY", "count": 1 },
+  "effects": [
+    { "type": "STUN", "duration_ms": 1500 },
+    { "type": "DAMAGE", "amount": 90, "scaling": "NONE" }
+  ]
+}

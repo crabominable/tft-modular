@@ -14,8 +14,8 @@ import type { PluginBundle } from "./types.ts";
 export function packToBundle(pack: PluginPack, modHash: string): PluginBundle {
   return {
     manifest: pack.manifest,
-    units: pack.units,
-    traits: pack.traits,
+    units: pack.units as PluginBundle["units"],
+    traits: pack.traits as PluginBundle["traits"],
     abilities: pack.abilities,
     modHash,
   };

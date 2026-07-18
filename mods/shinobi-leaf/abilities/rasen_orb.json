@@ -1,0 +1,8 @@
+{
+  "id": "rasen_orb",
+  "name": "Spiral Orb",
+  "mana_cost": 70,
+  "trigger": "ON_CAST",
+  "targeting": { "type": "NEAREST_ENEMY", "count": 1 },
+  "effects": [{ "type": "DAMAGE", "amount": 160, "scaling": "ATK" }]
+}

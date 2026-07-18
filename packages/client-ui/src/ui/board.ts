@@ -1,58 +1,114 @@
-import type { PlayerSnapshot } from "../types.ts";
+import type { PlayerSnapshot, PluginBundle } from "../types.ts";
+import { COST_COLORS } from "../types.ts";
 
 export type BoardHandlers = {
   onSelectBench: (instanceId: number) => void;
   onSelectCell: (x: number, y: number) => void;
 };
 
-export function renderBoard(
+function unitVisual(
+  defId: string,
+  cost: number,
+  names: Map<string, string>,
+): string {
+  const c = COST_COLORS[cost] ?? COST_COLORS[1]!;
+  const name = names.get(defId) ?? defId;
+  const initial = name
+    .split(/\s+/)
+    .map((w) => w[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+  return `
+    <div class="unit-chip">
+      <div class="portrait" style="border-color:${c.border};box-shadow:0 0 10px ${c.glow};color:${c.label}">${initial}</div>
+      <div class="name" style="color:${c.label}">${name}</div>
+      <div class="cost">${cost}g</div>
+    </div>`;
+}
+
+export function renderArena(
   root: HTMLElement,
   human: PlayerSnapshot | undefined,
-  unitNames: Map<string, string>,
+  ai: PlayerSnapshot | undefined,
+  bundle: PluginBundle,
   selectedInstanceId: number | null,
+  phase: string,
   handlers: BoardHandlers,
 ): void {
+  const names = new Map(bundle.units.map((u) => [u.id, u.name]));
   const board = human?.board ?? [];
+  const enemyBoard = ai?.board ?? [];
   const bench = human?.bench ?? [];
 
-  const cells: string[] = [];
+  const enemyCells: string[] = [];
+  // Enemy: show row y=0 front at bottom of their half visually → reverse y for display
+  for (let y = 1; y >= 0; y--) {
+    for (let x = 0; x < 4; x++) {
+      const unit = enemyBoard.find((b) => b.cell[0] === x && b.cell[1] === y);
+      if (unit) {
+        enemyCells.push(
+          `<div class="hex-cell enemy-filled">${unitVisual(unit.def_id, unit.cost, names)}</div>`,
+        );
+      } else {
+        enemyCells.push(`<div class="hex-cell"></div>`);
+      }
+    }
+  }
+
+  const playerCells: string[] = [];
   for (let y = 0; y < 2; y++) {
     for (let x = 0; x < 4; x++) {
       const unit = board.find((b) => b.cell[0] === x && b.cell[1] === y);
-      const label = unit
-        ? `${unitNames.get(unit.def_id) ?? unit.def_id}<br/><code>#${unit.instance_id}</code>`
-        : `<span class="meta">(${x},${y})</span>`;
-      cells.push(
-        `<div class="cell" data-x="${x}" data-y="${y}">${label}</div>`,
+      const filled = unit ? " filled" : "";
+      const inner = unit
+        ? unitVisual(unit.def_id, unit.cost, names)
+        : "";
+      playerCells.push(
+        `<div class="hex-cell${filled}" data-x="${x}" data-y="${y}">${inner}</div>`,
       );
     }
   }
 
-  const benchHtml =
-    bench.length === 0
-      ? `<span class="meta">empty</span>`
-      : bench
-          .map((u) => {
-            const sel = selectedInstanceId === u.instance_id ? " selected" : "";
-            const name = unitNames.get(u.def_id) ?? u.def_id;
-            return `<button type="button" class="bench-item${sel}" data-id="${u.instance_id}">${name} #${u.instance_id} (${u.cost}g)</button>`;
-          })
-          .join("");
+  const benchSlots: string[] = [];
+  for (let i = 0; i < 9; i++) {
+    const u = bench[i];
+    if (!u) {
+      benchSlots.push(`<div class="bench-slot empty">—</div>`);
+      continue;
+    }
+    const c = COST_COLORS[u.cost] ?? COST_COLORS[1]!;
+    const name = names.get(u.def_id) ?? u.def_id;
+    const sel = selectedInstanceId === u.instance_id ? " selected" : "";
+    benchSlots.push(
+      `<button type="button" class="bench-slot${sel}" data-id="${u.instance_id}" style="border-color:${c.border}">${name}</button>`,
+    );
+  }
+
+  const bannerClass = phase === "combat" ? "combat" : "";
+  const bannerText =
+    phase === "combat" ? "COMBATE" : phase === "match_end" ? "FIM" : "PLANEJE";
+
+  const over =
+    phase === "match_end" ? `<div class="match-over">FIM DE PARTIDA</div>` : "";
 
   root.innerHTML = `
-    <h2>Board (you)</h2>
-    <p class="meta">Select a bench unit, then click a cell to place. Or use Auto-place.</p>
-    <div class="board-grid">${cells.join("")}</div>
-    <h2 style="margin-top:0.75rem">Bench</h2>
-    <div class="bench-list">${benchHtml}</div>
+    <div class="hex-field">
+      <div class="phase-banner ${bannerClass}">${bannerText}</div>
+      <div class="board-side enemy">${enemyCells.join("")}</div>
+      <div class="board-side player">${playerCells.join("")}</div>
+      <div class="bench-row">${benchSlots.join("")}</div>
+      ${over}
+    </div>
   `;
 
-  root.querySelectorAll<HTMLElement>(".cell").forEach((el) => {
+  root.querySelectorAll<HTMLElement>(".board-side.player .hex-cell").forEach((el) => {
     el.addEventListener("click", () => {
+      if (el.dataset.x == null) return;
       handlers.onSelectCell(Number(el.dataset.x), Number(el.dataset.y));
     });
   });
-  root.querySelectorAll<HTMLButtonElement>(".bench-item").forEach((btn) => {
+  root.querySelectorAll<HTMLButtonElement>(".bench-slot[data-id]").forEach((btn) => {
     btn.addEventListener("click", () => {
       handlers.onSelectBench(Number(btn.dataset.id));
     });

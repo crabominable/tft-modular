@@ -1,90 +1,256 @@
 {
   "manifest": {
-    "id": "reference_embers",
-    "name": "Ember Frontier",
-    "version": "0.1.0",
+    "id": "shinobi_leaf",
+    "name": "Shinobi Leaf",
+    "version": "0.2.0",
     "api_version": "1.0.0",
-    "description": "Original sample pack for TFT Modular offline MVP."
+    "description": "Original ninja-village themed pack for TFT Modular. Inspired by classic shonen aesthetics — all names and designs are original."
   },
   "units": [
     {
-      "id": "ember_scout",
-      "name": "Ember Scout",
-      "cost": 1,
+      "id": "desert_wall",
+      "name": "Desert Wall",
+      "cost": 2,
       "traits": [
-        "emberkin"
+        "sand"
       ],
-      "ability_id": "spark_cut",
+      "ability_id": "sand_coffin",
       "stats": {
-        "hp": 500,
-        "atk": 45,
-        "armor": 10,
-        "mr": 10,
+        "hp": 850,
+        "atk": 42,
+        "armor": 45,
+        "mr": 25,
         "range": 1,
-        "attack_speed_milli": 700
+        "attack_speed_milli": 520
       }
     },
     {
-      "id": "mist_healer",
-      "name": "Mist Healer",
+      "id": "green_healer",
+      "name": "Green Healer",
       "cost": 2,
       "traits": [
-        "emberkin"
+        "leaf",
+        "mystic"
       ],
-      "ability_id": "mist_balm",
+      "ability_id": "heal_jutsu",
       "stats": {
-        "hp": 450,
-        "atk": 30,
-        "armor": 15,
-        "mr": 25,
+        "hp": 500,
+        "atk": 35,
+        "armor": 18,
+        "mr": 35,
         "range": 3,
         "attack_speed_milli": 650
       }
     },
     {
-      "id": "stone_warden",
-      "name": "Stone Warden",
+      "id": "iron_monk",
+      "name": "Iron Monk",
+      "cost": 3,
+      "traits": [
+        "sand",
+        "mystic"
+      ],
+      "ability_id": "iron_skin",
+      "stats": {
+        "hp": 1000,
+        "atk": 50,
+        "armor": 55,
+        "mr": 40,
+        "range": 1,
+        "attack_speed_milli": 500
+      }
+    },
+    {
+      "id": "leaf_runner",
+      "name": "Leaf Runner",
+      "cost": 1,
+      "traits": [
+        "leaf"
+      ],
+      "ability_id": "rasen_orb",
+      "stats": {
+        "hp": 520,
+        "atk": 48,
+        "armor": 15,
+        "mr": 15,
+        "range": 1,
+        "attack_speed_milli": 720
+      }
+    },
+    {
+      "id": "scarlet_vessel",
+      "name": "Scarlet Vessel",
+      "cost": 4,
+      "traits": [
+        "leaf",
+        "storm"
+      ],
+      "ability_id": "rasen_orb",
+      "stats": {
+        "hp": 900,
+        "atk": 85,
+        "armor": 30,
+        "mr": 30,
+        "range": 1,
+        "attack_speed_milli": 750
+      }
+    },
+    {
+      "id": "shadow_blade",
+      "name": "Shadow Blade",
+      "cost": 1,
+      "traits": [
+        "leaf"
+      ],
+      "ability_id": "chakra_blade",
+      "stats": {
+        "hp": 480,
+        "atk": 55,
+        "armor": 10,
+        "mr": 10,
+        "range": 1,
+        "attack_speed_milli": 780
+      }
+    },
+    {
+      "id": "storm_sniper",
+      "name": "Storm Sniper",
       "cost": 2,
       "traits": [
-        "bulwark"
+        "storm"
       ],
-      "ability_id": "guard_pulse",
+      "ability_id": "thunder_fall",
       "stats": {
-        "hp": 800,
-        "atk": 40,
-        "armor": 40,
+        "hp": 480,
+        "atk": 62,
+        "armor": 12,
+        "mr": 18,
+        "range": 4,
+        "attack_speed_milli": 680
+      }
+    },
+    {
+      "id": "thunder_prince",
+      "name": "Thunder Prince",
+      "cost": 3,
+      "traits": [
+        "storm"
+      ],
+      "ability_id": "thunder_fall",
+      "stats": {
+        "hp": 720,
+        "atk": 70,
+        "armor": 25,
         "mr": 20,
         "range": 1,
-        "attack_speed_milli": 550
+        "attack_speed_milli": 700
       }
     }
   ],
   "traits": [
     {
-      "id": "bulwark",
-      "name": "Bulwark",
-      "breakpoints": [
-        {
-          "min_units": 1,
-          "modifiers": [
-            {
-              "stat": "armor",
-              "amount": 20
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "emberkin",
-      "name": "Emberkin",
+      "id": "leaf",
+      "name": "Leaf Village",
       "breakpoints": [
         {
           "min_units": 2,
           "modifiers": [
             {
               "stat": "atk",
-              "amount": 15
+              "amount": 12
+            }
+          ]
+        },
+        {
+          "min_units": 4,
+          "modifiers": [
+            {
+              "stat": "atk",
+              "amount": 30
+            },
+            {
+              "stat": "hp",
+              "amount": 80
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mystic",
+      "name": "Mystic Arts",
+      "breakpoints": [
+        {
+          "min_units": 2,
+          "modifiers": [
+            {
+              "stat": "mr",
+              "amount": 20
+            }
+          ]
+        },
+        {
+          "min_units": 3,
+          "modifiers": [
+            {
+              "stat": "mr",
+              "amount": 45
+            },
+            {
+              "stat": "hp",
+              "amount": 60
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sand",
+      "name": "Sand Dunes",
+      "breakpoints": [
+        {
+          "min_units": 2,
+          "modifiers": [
+            {
+              "stat": "armor",
+              "amount": 25
+            }
+          ]
+        },
+        {
+          "min_units": 3,
+          "modifiers": [
+            {
+              "stat": "armor",
+              "amount": 50
+            },
+            {
+              "stat": "hp",
+              "amount": 120
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "storm",
+      "name": "Storm Cloud",
+      "breakpoints": [
+        {
+          "min_units": 2,
+          "modifiers": [
+            {
+              "stat": "atk",
+              "amount": 18
+            }
+          ]
+        },
+        {
+          "min_units": 3,
+          "modifiers": [
+            {
+              "stat": "atk",
+              "amount": 40
             }
           ]
         }
@@ -93,41 +259,9 @@
   ],
   "abilities": [
     {
-      "id": "guard_pulse",
-      "name": "Guard Pulse",
-      "mana_cost": 80,
-      "trigger": "ON_CAST",
-      "targeting": {
-        "type": "SELF"
-      },
-      "effects": [
-        {
-          "type": "SHIELD",
-          "amount": 200,
-          "duration_ms": 3000
-        }
-      ]
-    },
-    {
-      "id": "mist_balm",
-      "name": "Mist Balm",
-      "mana_cost": 70,
-      "trigger": "ON_CAST",
-      "targeting": {
-        "type": "SELF"
-      },
-      "effects": [
-        {
-          "type": "HEAL",
-          "amount": 180,
-          "scaling": "NONE"
-        }
-      ]
-    },
-    {
-      "id": "spark_cut",
-      "name": "Spark Cut",
-      "mana_cost": 60,
+      "id": "chakra_blade",
+      "name": "Chakra Blade",
+      "mana_cost": 55,
       "trigger": "ON_CAST",
       "targeting": {
         "type": "NEAREST_ENEMY",
@@ -136,11 +270,102 @@
       "effects": [
         {
           "type": "DAMAGE",
-          "amount": 120,
+          "amount": 130,
           "scaling": "ATK"
+        }
+      ]
+    },
+    {
+      "id": "heal_jutsu",
+      "name": "Green Hands",
+      "mana_cost": 60,
+      "trigger": "ON_CAST",
+      "targeting": {
+        "type": "SELF"
+      },
+      "effects": [
+        {
+          "type": "HEAL",
+          "amount": 220,
+          "scaling": "NONE"
+        }
+      ]
+    },
+    {
+      "id": "iron_skin",
+      "name": "Iron Skin",
+      "mana_cost": 65,
+      "trigger": "ON_CAST",
+      "targeting": {
+        "type": "SELF"
+      },
+      "effects": [
+        {
+          "type": "SHIELD",
+          "amount": 280,
+          "duration_ms": 4000
+        }
+      ]
+    },
+    {
+      "id": "rasen_orb",
+      "name": "Spiral Orb",
+      "mana_cost": 70,
+      "trigger": "ON_CAST",
+      "targeting": {
+        "type": "NEAREST_ENEMY",
+        "count": 1
+      },
+      "effects": [
+        {
+          "type": "DAMAGE",
+          "amount": 160,
+          "scaling": "ATK"
+        }
+      ]
+    },
+    {
+      "id": "sand_coffin",
+      "name": "Sand Coffin",
+      "mana_cost": 80,
+      "trigger": "ON_CAST",
+      "targeting": {
+        "type": "NEAREST_ENEMY",
+        "count": 1
+      },
+      "effects": [
+        {
+          "type": "STUN",
+          "duration_ms": 1500
+        },
+        {
+          "type": "DAMAGE",
+          "amount": 90,
+          "scaling": "NONE"
+        }
+      ]
+    },
+    {
+      "id": "thunder_fall",
+      "name": "Thunder Fall",
+      "mana_cost": 75,
+      "trigger": "ON_CAST",
+      "targeting": {
+        "type": "RANDOM_ENEMY",
+        "count": 1
+      },
+      "effects": [
+        {
+          "type": "DAMAGE",
+          "amount": 200,
+          "scaling": "NONE"
+        },
+        {
+          "type": "STUN",
+          "duration_ms": 800
         }
       ]
     }
   ],
-  "modHash": "bafe5e2f6856c4545ce7109107220400f7d6e713c3b83d3fd4e9d748f0bcf38f"
+  "modHash": "c67ff4fd00ff3c37c6985871dc78f82d9ac77b0f10b076acea28e357b9040a44"
 }

@@ -1,0 +1,11 @@
+{
+  "id": "thunder_fall",
+  "name": "Thunder Fall",
+  "mana_cost": 75,
+  "trigger": "ON_CAST",
+  "targeting": { "type": "RANDOM_ENEMY", "count": 1 },
+  "effects": [
+    { "type": "DAMAGE", "amount": 200, "scaling": "NONE" },
+    { "type": "STUN", "duration_ms": 800 }
+  ]
+}

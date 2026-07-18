@@ -1,0 +1,8 @@
+{
+  "id": "chakra_blade",
+  "name": "Chakra Blade",
+  "mana_cost": 55,
+  "trigger": "ON_CAST",
+  "targeting": { "type": "NEAREST_ENEMY", "count": 1 },
+  "effects": [{ "type": "DAMAGE", "amount": 130, "scaling": "ATK" }]
+}

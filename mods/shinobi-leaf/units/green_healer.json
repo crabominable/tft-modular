@@ -1,0 +1,8 @@
+{
+  "id": "green_healer",
+  "name": "Green Healer",
+  "cost": 2,
+  "traits": ["leaf", "mystic"],
+  "ability_id": "heal_jutsu",
+  "stats": { "hp": 500, "atk": 35, "armor": 18, "mr": 35, "range": 3, "attack_speed_milli": 650 }
+}

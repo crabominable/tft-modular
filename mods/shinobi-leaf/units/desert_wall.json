@@ -1,0 +1,8 @@
+{
+  "id": "desert_wall",
+  "name": "Desert Wall",
+  "cost": 2,
+  "traits": ["sand"],
+  "ability_id": "sand_coffin",
+  "stats": { "hp": 850, "atk": 42, "armor": 45, "mr": 25, "range": 1, "attack_speed_milli": 520 }
+}

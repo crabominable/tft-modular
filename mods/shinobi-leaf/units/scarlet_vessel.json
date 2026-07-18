@@ -1,0 +1,8 @@
+{
+  "id": "scarlet_vessel",
+  "name": "Scarlet Vessel",
+  "cost": 4,
+  "traits": ["leaf", "storm"],
+  "ability_id": "rasen_orb",
+  "stats": { "hp": 900, "atk": 85, "armor": 30, "mr": 30, "range": 1, "attack_speed_milli": 750 }
+}

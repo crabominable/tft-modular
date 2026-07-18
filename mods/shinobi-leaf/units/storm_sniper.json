@@ -1,0 +1,8 @@
+{
+  "id": "storm_sniper",
+  "name": "Storm Sniper",
+  "cost": 2,
+  "traits": ["storm"],
+  "ability_id": "thunder_fall",
+  "stats": { "hp": 480, "atk": 62, "armor": 12, "mr": 18, "range": 4, "attack_speed_milli": 680 }
+}
