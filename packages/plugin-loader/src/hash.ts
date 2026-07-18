@@ -18,6 +18,7 @@ function bytesToHex(bytes: Uint8Array): string {
 
 /**
  * Canonical pack hash: sort paths UTF-8, SHA-256 over path\0len\0bytes concatenation.
+ * Uses Web Crypto (browser + Node 20+).
  */
 export async function hashCanonicalPack(
   files: Map<string, Uint8Array>,
@@ -35,12 +36,16 @@ export async function hashCanonicalPack(
   }
   const total = concat(chunks);
 
-  // Prefer Web Crypto when available (browser / modern Node)
-  if (globalThis.crypto?.subtle) {
-    const digest = await globalThis.crypto.subtle.digest("SHA-256", total);
-    return bytesToHex(new Uint8Array(digest));
+  const subtle = globalThis.crypto?.subtle;
+  if (!subtle) {
+    throw new Error("Web Crypto SHA-256 is required (crypto.subtle unavailable)");
   }
 
-  const { createHash } = await import("node:crypto");
-  return createHash("sha256").update(total).digest("hex");
+  // Copy into a fresh ArrayBuffer to satisfy BufferSource typing across TS DOM libs.
+  const ab = total.buffer.slice(
+    total.byteOffset,
+    total.byteOffset + total.byteLength,
+  ) as ArrayBuffer;
+  const digest = await subtle.digest("SHA-256", ab);
+  return bytesToHex(new Uint8Array(digest));
 }

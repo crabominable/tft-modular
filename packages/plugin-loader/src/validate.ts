@@ -1,15 +1,11 @@
-import { createRequire } from "node:module";
-import { readFileSync } from "node:fs";
 import Ajv2020 from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
 import type { ErrorObject, ValidateFunction } from "ajv";
 
-const require = createRequire(import.meta.url);
-
-function loadSchema(name: string): object {
-  const resolved = require.resolve(`@tft/plugin-schema/schemas/${name}`);
-  return JSON.parse(readFileSync(resolved, "utf8")) as object;
-}
+import abilitySchema from "@tft/plugin-schema/schemas/ability.schema.json" with { type: "json" };
+import manifestSchema from "@tft/plugin-schema/schemas/manifest.schema.json" with { type: "json" };
+import traitSchema from "@tft/plugin-schema/schemas/trait.schema.json" with { type: "json" };
+import unitSchema from "@tft/plugin-schema/schemas/unit.schema.json" with { type: "json" };
 
 const ajv = new Ajv2020({
   allErrors: true,
@@ -18,10 +14,10 @@ const ajv = new Ajv2020({
 });
 addFormats(ajv);
 
-const validateManifestFn = ajv.compile(loadSchema("manifest.schema.json"));
-const validateUnitFn = ajv.compile(loadSchema("unit.schema.json"));
-const validateTraitFn = ajv.compile(loadSchema("trait.schema.json"));
-const validateAbilityFn = ajv.compile(loadSchema("ability.schema.json"));
+const validateManifestFn = ajv.compile(manifestSchema as object);
+const validateUnitFn = ajv.compile(unitSchema as object);
+const validateTraitFn = ajv.compile(traitSchema as object);
+const validateAbilityFn = ajv.compile(abilitySchema as object);
 
 export type ValidationResult =
   | { ok: true; value: unknown }

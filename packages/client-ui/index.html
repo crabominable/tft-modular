@@ -134,12 +134,33 @@
       code {
         font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       }
+      label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        font-size: 0.85rem;
+        color: #b8c4d0;
+      }
+      input[type="url"],
+      input[type="text"] {
+        background: #121820;
+        color: #e7ecf1;
+        border: 1px solid #334050;
+        border-radius: 6px;
+        padding: 0.4rem 0.55rem;
+        font: inherit;
+      }
+      input[type="file"] {
+        font: inherit;
+        color: #b8c4d0;
+      }
     </style>
   </head>
   <body>
     <h1>TFT Modular — offline vertical slice</h1>
     <p class="meta">
-      Fixed seed <code>42</code> for QA · wasm match + reference-mod bundle
+      Fixed seed <code>42</code> for QA · zip/URL load + local hash cache ·
+      <code>?autoload=1</code> for reference-mod
     </p>
     <div id="app">Loading…</div>
     <script type="module" src="/src/main.ts"></script>
