@@ -3,6 +3,7 @@
 /dist
 /packages/client-ui/dist
 /crates/engine-wasm/pkg
+/packages/client-ui/src/wasm-pkg
 *.log
 .DS_Store
 .env
