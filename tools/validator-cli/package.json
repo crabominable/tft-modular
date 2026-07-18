@@ -1,0 +1,11 @@
+{
+  "name": "validator-cli",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --experimental-strip-types src/cli.ts"
+  },
+  "dependencies": {
+    "@tft/plugin-loader": "workspace:*"
+  }
+}

@@ -1,1 +1,1 @@
-export * from "./limits.js";
+export * from "./limits.ts";
