@@ -1,11 +1,8 @@
-//! Player commands (partial — shop/economy subset until match loop lands).
+//! Player commands accepted by the match state machine.
 
 use serde::{Deserialize, Serialize};
 
 /// Commands a human (or AI) may issue during a match.
-///
-/// Task 6 implements shop/economy actions only. Placement and phase end
-/// arrive with the match state machine (Task 8).
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "type", rename_all = "snake_case")]
 pub enum Command {
@@ -33,6 +30,11 @@ mod tests {
             },
             Command::Reroll,
             Command::BuyExp,
+            Command::PlaceUnit {
+                unit_instance_id: 3,
+                cell: (1, 0),
+            },
+            Command::EndShopPhase,
         ];
         for cmd in cmds {
             let json = serde_json::to_string(&cmd).unwrap();
