@@ -1,0 +1,15 @@
+{
+  "id": "mist_healer",
+  "name": "Mist Healer",
+  "cost": 2,
+  "traits": ["emberkin"],
+  "ability_id": "mist_balm",
+  "stats": {
+    "hp": 450,
+    "atk": 30,
+    "armor": 15,
+    "mr": 25,
+    "range": 3,
+    "attack_speed_milli": 650
+  }
+}

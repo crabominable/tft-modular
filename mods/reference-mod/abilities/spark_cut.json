@@ -1,0 +1,10 @@
+{
+  "id": "spark_cut",
+  "name": "Spark Cut",
+  "mana_cost": 60,
+  "trigger": "ON_CAST",
+  "targeting": { "type": "NEAREST_ENEMY", "count": 1 },
+  "effects": [
+    { "type": "DAMAGE", "amount": 120, "scaling": "ATK" }
+  ]
+}

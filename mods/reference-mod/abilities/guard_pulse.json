@@ -1,0 +1,10 @@
+{
+  "id": "guard_pulse",
+  "name": "Guard Pulse",
+  "mana_cost": 80,
+  "trigger": "ON_CAST",
+  "targeting": { "type": "SELF" },
+  "effects": [
+    { "type": "SHIELD", "amount": 200, "duration_ms": 3000 }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "mist_balm",
+  "name": "Mist Balm",
+  "mana_cost": 70,
+  "trigger": "ON_CAST",
+  "targeting": { "type": "SELF" },
+  "effects": [
+    { "type": "HEAL", "amount": 180, "scaling": "NONE" }
+  ]
+}

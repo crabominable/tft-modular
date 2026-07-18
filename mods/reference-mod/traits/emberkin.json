@@ -1,0 +1,10 @@
+{
+  "id": "emberkin",
+  "name": "Emberkin",
+  "breakpoints": [
+    {
+      "min_units": 2,
+      "modifiers": [{ "stat": "atk", "amount": 15 }]
+    }
+  ]
+}

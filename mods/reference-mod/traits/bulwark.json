@@ -1,0 +1,10 @@
+{
+  "id": "bulwark",
+  "name": "Bulwark",
+  "breakpoints": [
+    {
+      "min_units": 1,
+      "modifiers": [{ "stat": "armor", "amount": 20 }]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "ember_scout",
+  "name": "Ember Scout",
+  "cost": 1,
+  "traits": ["emberkin"],
+  "ability_id": "spark_cut",
+  "stats": {
+    "hp": 500,
+    "atk": 45,
+    "armor": 10,
+    "mr": 10,
+    "range": 1,
+    "attack_speed_milli": 700
+  }
+}
