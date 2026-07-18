@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tft-modular.local/schemas/unit.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "cost", "traits", "stats"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1, "maxLength": 64, "pattern": "^[a-z0-9_\\-]+$" },
+    "name": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "cost": { "type": "integer", "minimum": 1, "maximum": 5 },
+    "traits": {
+      "type": "array",
+      "items": { "type": "string" },
+      "maxItems": 4,
+      "uniqueItems": true
+    },
+    "ability_id": { "type": ["string", "null"] },
+    "stats": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hp", "atk", "range", "attack_speed_milli"],
+      "properties": {
+        "hp": { "type": "integer", "minimum": 1, "maximum": 100000 },
+        "atk": { "type": "integer", "minimum": 0, "maximum": 100000 },
+        "armor": { "type": "integer", "minimum": 0, "maximum": 1000, "default": 0 },
+        "mr": { "type": "integer", "minimum": 0, "maximum": 1000, "default": 0 },
+        "range": { "type": "integer", "minimum": 1, "maximum": 6 },
+        "attack_speed_milli": { "type": "integer", "minimum": 100, "maximum": 5000 }
+      }
+    }
+  }
+}

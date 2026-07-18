@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tft-modular.local/schemas/manifest.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "version", "api_version"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1, "maxLength": 64, "pattern": "^[a-z0-9_\\-]+$" },
+    "name": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "api_version": { "type": "string", "const": "1.0.0" },
+    "description": { "type": "string", "maxLength": 500 }
+  }
+}

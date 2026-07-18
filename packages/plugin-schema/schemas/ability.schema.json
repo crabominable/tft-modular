@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tft-modular.local/schemas/ability.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "trigger", "targeting", "effects"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9_\\-]+$" },
+    "name": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "mana_cost": { "type": "integer", "minimum": 0, "maximum": 200, "default": 100 },
+    "trigger": {
+      "type": "string",
+      "enum": ["ON_CAST", "ON_HIT", "ON_DEATH", "ROUND_START"]
+    },
+    "targeting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["SELF", "NEAREST_ENEMY", "RANDOM_ENEMY", "ALL_ENEMIES"]
+        },
+        "count": { "type": "integer", "minimum": 1, "maximum": 12 }
+      }
+    },
+    "effects": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["DAMAGE", "HEAL", "SHIELD", "STUN", "STAT_MOD"]
+          },
+          "amount": { "type": "integer", "minimum": 0, "maximum": 100000 },
+          "duration_ms": { "type": "integer", "minimum": 0, "maximum": 60000 },
+          "stat": { "type": "string", "enum": ["hp", "atk", "armor", "mr"] },
+          "scaling": { "type": "string", "enum": ["NONE", "AP", "ATK"] }
+        }
+      }
+    }
+  }
+}
