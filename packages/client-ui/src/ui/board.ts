@@ -41,8 +41,8 @@ export function renderArena(
   const enemyBoard = ai?.board ?? [];
   const bench = human?.bench ?? [];
 
+  // Enemy: reverse y so front line sits toward mid-field
   const enemyCells: string[] = [];
-  // Enemy: show row y=0 front at bottom of their half visually → reverse y for display
   for (let y = 1; y >= 0; y--) {
     for (let x = 0; x < 4; x++) {
       const unit = enemyBoard.find((b) => b.cell[0] === x && b.cell[1] === y);
@@ -51,7 +51,7 @@ export function renderArena(
           `<div class="hex-cell enemy-filled">${unitVisual(unit.def_id, unit.cost, names)}</div>`,
         );
       } else {
-        enemyCells.push(`<div class="hex-cell"></div>`);
+        enemyCells.push(`<div class="hex-cell" aria-hidden="true"></div>`);
       }
     }
   }
@@ -61,11 +61,9 @@ export function renderArena(
     for (let x = 0; x < 4; x++) {
       const unit = board.find((b) => b.cell[0] === x && b.cell[1] === y);
       const filled = unit ? " filled" : "";
-      const inner = unit
-        ? unitVisual(unit.def_id, unit.cost, names)
-        : "";
+      const inner = unit ? unitVisual(unit.def_id, unit.cost, names) : "";
       playerCells.push(
-        `<div class="hex-cell${filled}" data-x="${x}" data-y="${y}">${inner}</div>`,
+        `<div class="hex-cell${filled}" data-x="${x}" data-y="${y}" role="button" tabindex="0">${inner}</div>`,
       );
     }
   }
@@ -92,11 +90,16 @@ export function renderArena(
   const over =
     phase === "match_end" ? `<div class="match-over">FIM DE PARTIDA</div>` : "";
 
+  // Flex stack: enemy top, player bottom, bench under — no absolute overlap
   root.innerHTML = `
     <div class="hex-field">
       <div class="phase-banner ${bannerClass}">${bannerText}</div>
-      <div class="board-side enemy">${enemyCells.join("")}</div>
-      <div class="board-side player">${playerCells.join("")}</div>
+      <div class="board-stack">
+        <div class="board-label enemy">Rival</div>
+        <div class="board-side enemy">${enemyCells.join("")}</div>
+        <div class="board-label player">Você</div>
+        <div class="board-side player">${playerCells.join("")}</div>
+      </div>
       <div class="bench-row">${benchSlots.join("")}</div>
       ${over}
     </div>
